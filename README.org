@@ -1,0 +1,20 @@
+* Haskell to Web compilation survey
+
+There are three haskell to web compilers in varying maturity levels.
+- [[https://github.com/ghcjs/ghcjs][ghcjs]] the oldest haskell to web compiler that produces JavaScript.
+- [[https://github.com/tweag/asterius][Asterius]] a haskell to webassembly compiler.
+- [[https://github.com/WebGHC][WebGHC]] a webassembly code generator for ghc.
+
+** Building
+
+Please refer to the relevant notes regarding building of the
+compilers.
+
+|          | Linux | macOS | Windows |
+| ghcjs    | Yes   | Yes   |         |
+| Asterius |       |       |         |
+| WebGHC   | Yes   | Yes   |         |
+
+** Features
+
+** Compiling applications / libraries

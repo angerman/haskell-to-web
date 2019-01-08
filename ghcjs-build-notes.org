@@ -1,0 +1,66 @@
+* Buding GHCJS 8.6 on macOS
+
+** ghcjs needs bash > 4 and gnu-tar; ensure they are also in PATH!
+- brew install bash      # for a newer bash (macOS mojave ships with 3.6)
+- brew install gnu-tar   # for gtar
+- brew install coreutils # for ld
+- export
+  PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/Cellar/bash/5.0.0/bin:$PATH
+- ghc-8.6 (download from haskell.org; install and put into $PATH)
+
+** get the sources
+- git clone --branch ghc-8.6 https://github.com/ghcjs/ghcjs.git
+- cd ghcjs
+- git submodule update --init --recursive
+- ./utils/makePackages.sh
+
+** configure and build
+- cabal new-configure
+- cabal new-build
+
+** setup/install
+- mkdir bin
+- (cd bin && for a in ghcjs ghcjs-pkg ghcjs-run haddock-ghcjs \
+  hsc2hs-ghcjs ghcjs-boot; do ln -s ../utils/dist-newstyle-wrapper.sh \
+  $a; done)
+- export PATH=$PWD/bin:$PATH
+# don't use haddock, that will likely fail and be a source of frustration
+- ghcjs-boot -s data/boot.tar --no-haddock
+
+* Building GHCJS 8.6 on Linux (deb9)
+
+** ghcjs needs numa, git, autotools
+- apt-get install numa-dev git autoconf libgmp10-dev libz-dev
+  libtinfo-dev curl
+- ghc-8.6 (downlaod from haskell.org; install and put into $PATH)
+- cabal-install # needs libgmp10-dev
+- node (curl -sL https://deb.nodesource.com/setup_10.x -o
+  nodesource_setup.sh; sudo bash ./nodesource_setup.hs)
+
+** get the sources
+- git clone --branch ghc-8.6 https://github.com/ghcjs/ghcjs.git
+- cd ghcjs
+- git submodule update --init --recursive
+- ./utils/makePackages.sh
+
+** configure and build
+- cabal new-configure
+- cabal new-build
+
+** setup/install
+- mkdir bin
+- (cd bin && for a in ghcjs ghcjs-pkg ghcjs-run haddock-ghcjs \
+  hsc2hs-ghcjs ghcjs-boot; do ln -s ../utils/dist-newstyle-wrapper.sh \
+  $a; done)
+- export PATH=$PWD/bin:$PATH
+# don't use haddock, that will likely fail and be a source of frustration
+- ghcjs-boot -s data/boot.tar --no-haddock
+
+
+* Other GHCJS notes
+
+** Usage
+- To use cabal just pass --ghcjs
+** Annoyances
+- ghcjs-base is not on hackage, so you'll need to add it to every
+  package.
