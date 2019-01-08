@@ -25,7 +25,7 @@ A selection of [[http://haskell-miso.org][miso]] apps.
 - ghcjs build command
 #+BEGIN_SRC bash
 for a in todo-mvc mario flatris snake 2048 simple
-do cabal --project-file=ghcjs.project new-build --ghcjs exe:$a -fexamples --allow-newer
+do cabal new-build --project-file=ghcjs.project --ghcjs exe:$a -fexamples --allow-newer
 done
 #+END_SRC
 
@@ -37,14 +37,14 @@ done
 - WebGHC build command
 #+BEGIN_SRC bash
 for a in todo-mvc mario flatris snake 2048 simple
-do cabal --project-file=webghc.project new-build exe:$a -fjsaddle-wasm -fexamples --allow-newer
+do wasm32-unknown-unknown-wasm-cabal new-build --project-file=webghc.project exe:$a -fjsaddle-wasm -fexamples --allow-newer
 done
 #+END_SRC
 
 |          | ghcjs | Asterius | WebGHC |
-| todo-mvc | [[https://angerman.github.io/haskell-to-web/ghcjs/todo-mvc.jsexe/index.html][link]]  |          |        |
-| mario    | [[https://angerman.github.io/haskell-to-web/ghcjs/mario.jsexe/index.html][link]]  |          |        |
-| flatris  | [[https://angerman.github.io/haskell-to-web/ghcjs/flatris.jsexe/index.html][link]]  |          |        |
-| snake    |       |          |        |
-| 2048     | [[https://angerman.github.io/haskell-to-web/ghcjs/2048.jsexe/index.html][link]]  |          |        |
-| simple   | [[https://angerman.github.io/haskell-to-web/ghcjs/simple.jsexe/index.html][link]]  |          |        |
+| todo-mvc | [[https://angerman.github.io/haskell-to-web/ghcjs/todo-mvc.jsexe/index.html][link]]  |          | [[https://angerman.github.io/haskell-to-web/webghc/todo-mvc/index.html][link]]   |
+| mario    | [[https://angerman.github.io/haskell-to-web/ghcjs/mario.jsexe/index.html][link]]  |          | [[https://angerman.github.io/haskell-to-web/webghc/mario/index.html][link]]   |
+| flatris  | [[https://angerman.github.io/haskell-to-web/ghcjs/flatris.jsexe/index.html][link]]  |          | [[https://angerman.github.io/haskell-to-web/webghc/flatris/index.html][link]]   |
+| snake    | :(    |          | :(     |
+| 2048     | [[https://angerman.github.io/haskell-to-web/ghcjs/2048.jsexe/index.html][link]]  |          | [[https://angerman.github.io/haskell-to-web/webghc/2048/index.html][link]]   |
+| simple   | [[https://angerman.github.io/haskell-to-web/ghcjs/simple.jsexe/index.html][link]]  |          | [[https://angerman.github.io/haskell-to-web/webghc/simple/index.html][link]]   |
