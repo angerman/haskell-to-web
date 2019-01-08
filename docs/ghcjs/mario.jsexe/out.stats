@@ -1,0 +1,114 @@
+code size summary per package:
+
+base:                    433326
+containers-0.6.0.1-BAqcfV1UBBeCIRjPbUYeSG:68627
+ghc-prim:                26211
+ghcjs-base-0.2.0.0-inplace:9970
+ghcjs-prim-0.1.1.0-EXzjGVHQlAS2XAXcu0iCbS:9027
+integer-gmp:             6320
+jsddl-wrp-0.9.5.0-b0a475e4:53226
+main:                    48881
+miso-0.21.2.0-inplace:   148708
+
+
+code size per module:
+
+base
+    Control.Exception.Base:             1033
+    Data.OldList:                       73996
+    Data.Typeable.Internal:             10700
+    Foreign.C.Error:                    1574
+    Foreign.Marshal.Alloc:              3219
+    Foreign.Storable:                   3352
+    GHC.Arr:                            6453
+    GHC.Base:                           9884
+    GHC.Conc.Sync:                      271
+    GHC.Enum:                           494
+    GHC.Err:                            10644
+    GHC.Exception:                      5212
+    GHC.Exception.Type:                 6654
+    GHC.Fingerprint:                    1043
+    GHC.Fingerprint.Type:               58506
+    GHC.Float:                          11962
+    GHC.Foreign:                        1296
+    GHC.ForeignPtr:                     3510
+    GHC.IO:                             1241
+    GHC.IO.Buffer:                      850
+    GHC.IO.BufferedIO:                  1248
+    GHC.IO.Device:                      1044
+    GHC.IO.Encoding:                    906
+    GHC.IO.Encoding.Failure:            983
+    GHC.IO.Encoding.Types:              62030
+    GHC.IO.Encoding.UTF8:               22855
+    GHC.IO.Exception:                   34892
+    GHC.IO.FD:                          368
+    GHC.IO.Handle:                      7182
+    GHC.IO.Handle.FD:                   27161
+    GHC.IO.Handle.Internals:            3651
+    GHC.IO.Handle.Types:                1012
+    GHC.Int:                            7071
+    GHC.List:                           174
+    GHC.MVar:                           244
+    GHC.Maybe:                          174
+    GHC.Ptr:                            2073
+    GHC.Real:                           180
+    GHC.STRef:                          8083
+    GHC.Show:                           4159
+    GHC.Stack.CCS:                      1268
+    GHC.Stack.Types:                    14568
+    GHC.TopHandler:                     459
+    GHC.Word:                           15693
+    System.Posix.Internals:             3954
+
+containers-0.6.0.1-BAqcfV1UBBeCIRjPbUYeSG
+    Data.Map.Internal:                  38054
+    Data.Sequence.Internal:             29235
+    Data.Set.Internal:                  1338
+
+ghc-prim
+    GHC.CString:                        1684
+    GHC.Classes:                        139
+    GHC.IntWord64:                      2617
+    GHC.Tuple:                          3215
+    GHC.Types:                          18556
+
+ghcjs-base-0.2.0.0-inplace
+    Data.JSString.Internal.Fusion.Common:1671
+    Data.JSString.Internal.Fusion.Types:251
+    Data.JSString.Internal.Type:        354
+    GHCJS.Foreign.Internal:             5134
+    GHCJS.Marshal:                      539
+    GHCJS.Marshal.Internal:             393
+    GHCJS.Marshal.Pure:                 535
+    JavaScript.Array.Internal:          949
+    JavaScript.Web.AnimationFrame:      144
+
+ghcjs-prim-0.1.1.0-EXzjGVHQlAS2XAXcu0iCbS
+    GHCJS.Prim:                         3632
+    GHCJS.Prim.Internal:                5395
+
+integer-gmp
+    GHC.Integer.Type:                   6320
+
+jsddl-wrp-0.9.5.0-b0a475e4
+    Language.Javascript.JSaddle.Warp:   53226
+
+main
+    Main:                               48881
+
+miso-0.21.2.0-inplace
+    Miso:                               1528
+    Miso.Delegate:                      2679
+    Miso.Diff:                          261
+    Miso.Effect:                        22471
+    Miso.Event.Types:                   258
+    Miso.Html.Element:                  12992
+    Miso.Html.Internal:                 2344
+    Miso.Html.Property:                 21243
+    Miso.Subscription.Keyboard:         3745
+    Miso.Subscription.Window:           81187
+
+
+
+packed metadata: 162718
+

@@ -21,15 +21,29 @@ Notes: [[ghcjs-build-notes.org][ghcjs]]
 
 ** Compiling applications / libraries
 
-A selection of miso apps.
+A selection of [[http://haskell-miso.org][miso]] apps.
 - ghcjs build command
 #+BEGIN_SRC bash
-for a in todo-mvc mario flatris snake 2048 simple; do cabal new-build --ghcjs exe:$a -fexamples --allow-newer; done
+for a in todo-mvc mario flatris snake 2048 simple
+do cabal --project-file=ghcjs.project new-build --ghcjs exe:$a -fexamples --allow-newer
+done
+#+END_SRC
+
+- Asterius build command
+#+BEGIN_SRC bash
+
+#+END_SRC
+
+- WebGHC build command
+#+BEGIN_SRC bash
+for a in todo-mvc mario flatris snake 2048 simple
+do cabal --project-file=webghc.project new-build exe:$a -fjsaddle-wasm -fexamples --allow-newer
+done
 #+END_SRC
 
 |          | ghcjs | Asterius | WebGHC |
-| todo-mvc |       |          |        |
-| mario    |       |          |        |
+| todo-mvc | [[https://angerman.github.io/haskell-to-web/ghcjs/todo-mvc.jsexe][link]]  |          |        |
+| mario    | [[https://angerman.github.io/ghcjs/mario.jsexe][link]]      |          |        |
 | flatris  |       |          |        |
 | snake    |       |          |        |
 | 2048     |       |          |        |
