@@ -1,0 +1,6 @@
+[submodule "miso"]
+	path = miso
+	url = git@github.com:zw3rk/miso.git
+[submodule "ghcjs"]
+	path = ghcjs
+	url = git@github.com:ghcjs/ghcjs
