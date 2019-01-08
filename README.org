@@ -20,3 +20,17 @@ Notes: [[ghcjs-build-notes.org][ghcjs]]
 ** Features
 
 ** Compiling applications / libraries
+
+A selection of miso apps.
+- ghcjs build command
+#+BEGIN_SRC bash
+for a in todo-mvc mario flatris snake 2048 simple; do cabal new-build --ghcjs exe:$a -fexamples --allow-newer; done
+#+END_SRC
+
+|          | ghcjs | Asterius | WebGHC |
+| todo-mvc |       |          |        |
+| mario    |       |          |        |
+| flatris  |       |          |        |
+| snake    |       |          |        |
+| 2048     |       |          |        |
+| simple   |       |          |        |
