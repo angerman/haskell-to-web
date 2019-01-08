@@ -42,9 +42,9 @@ done
 #+END_SRC
 
 |          | ghcjs | Asterius | WebGHC |
-| todo-mvc | [[https://angerman.github.io/haskell-to-web/ghcjs/todo-mvc.jsexe][link]]  |          |        |
-| mario    | [[https://angerman.github.io/ghcjs/mario.jsexe][link]]      |          |        |
-| flatris  |       |          |        |
+| todo-mvc | [[https://angerman.github.io/haskell-to-web/ghcjs/todo-mvc.jsexe/index.html][link]]  |          |        |
+| mario    | [[https://angerman.github.io/ghcjs/mario.jsexe/index.html][link]]  |          |        |
+| flatris  | [[https://angerman.github.io/ghcjs/flatris.jsexe/index.html][link]]  |          |        |
 | snake    |       |          |        |
-| 2048     |       |          |        |
-| simple   |       |          |        |
+| 2048     | [[https://angerman.github.io/ghcjs/2048.jsexe/index.html][link]]  |          |        |
+| simple   | [[https://angerman.github.io/ghcjs/simple.jsexe/index.html][link]]  |          |        |
