@@ -38,7 +38,7 @@ make the result more favorable to the googles closure compiler.
 #+BEGIN_SRC bash
 ccjs all.js --compilation_level=ADVANCED_OPTIMIZATIONS --jscomp_off=checkVars --externs=node --externs=all.js.externs > all.adv.min.js
 #+END_SRC
-(see [[https://github.com/ghcjs/ghcjs/wiki/Deployment][{ghcjs deployment wiki}]])
+(see [[https://github.com/ghcjs/ghcjs/wiki/Deployment][ghcjs deployment wiki]])
 
 *** Asterius
 
