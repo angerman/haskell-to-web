@@ -21,31 +21,46 @@ Notes: [[ghcjs-build-notes.org][ghcjs]]
 
 ** Compiling applications / libraries
 
-A selection of [[http://haskell-miso.org][miso]] apps (these do not require TH).
+*** ghcjs
 
-- ghcjs build command
+**** building
 #+BEGIN_SRC bash
-for a in todo-mvc mario flatris snake 2048 simple
-do cabal new-build --project-file=ghcjs.project --ghcjs exe:$a -fexamples --allow-newer
-done
+cabal new-build --project-file=ghcjs.project --ghcjs exe:$app -fexamples --allow-newer
 #+END_SRC
 
-- Asterius build command
+**** optimizing
+One option is to pass ~-dedupe~, which will reduce the resulting
+size. The other is to use googles closure compiler to optimize it.
+
+#+BEGIN_SRC bash
+ccjs all.js --compilation_level=ADVANCED_OPTIMIZATIONS --jscomp_off=checkVars --externs=node --externs=all.js.externs > all.adv.min.js
+#+END_SRC
+(see [[https://github.com/ghcjs/ghcjs/wiki/Deployment][{ghcjs deployment wiki}]])
+
+*** Asterius
+
+**** building
 #+BEGIN_SRC bash
 
 #+END_SRC
+**** optimizing
 
-- WebGHC build command
+*** WebGHC
+
+**** building
 #+BEGIN_SRC bash
-for a in todo-mvc mario flatris snake 2048 simple
-do wasm32-unknown-unknown-wasm-cabal new-build --project-file=webghc.project exe:$a -fjsaddle-wasm -fexamples --allow-newer
-done
+wasm32-unknown-unknown-wasm-cabal new-build --project-file=webghc.project exe:$app -fjsaddle-wasm -fexamples --allow-newer
 #+END_SRC
 
-|          | ghcjs (total) | Asterius | WebGHC (total; wasm only) |
-| todo-mvc | [[https://angerman.github.io/haskell-to-web/ghcjs/todo-mvc.jsexe/index.html][link]] (5.2M)   |          | [[https://angerman.github.io/haskell-to-web/webghc/todo-mvc/index.html][link]] (18M; 4.6M)          |
-| mario    | [[https://angerman.github.io/haskell-to-web/ghcjs/mario.jsexe/index.html][link]] (4.0M)   |          | [[https://angerman.github.io/haskell-to-web/webghc/mario/index.html][link]] (18M; 4.5M)          |
-| flatris  | [[https://angerman.github.io/haskell-to-web/ghcjs/flatris.jsexe/index.html][link]] (7.6M)   |          | [[https://angerman.github.io/haskell-to-web/webghc/flatris/index.html][link]] (18M; 5.2M)          |
-| snake    | :(            |          | :(                        |
-| 2048     | [[https://angerman.github.io/haskell-to-web/ghcjs/2048.jsexe/index.html][link]] (5.4M)   |          | [[https://angerman.github.io/haskell-to-web/webghc/2048/index.html][link]] (18M; 4.7M)          |
-| simple   | [[https://angerman.github.io/haskell-to-web/ghcjs/simple.jsexe/index.html][link]] (3.8M)   |          | [[https://angerman.github.io/haskell-to-web/webghc/simple/index.html][link]] (18M; 4.4M)          |
+**** optimizing
+
+
+*** A selection of [[http://haskell-miso.org][miso]] apps (these do not require TH)
+
+|          | ghcjs (total) | ghcjs (ccjs; dedupe; dedupe+ccjs) | Asterius | Asterius (opt) | WebGHC (total; wasm only) | WebGHC (opt) |
+| todo-mvc | [[https://angerman.github.io/haskell-to-web/ghcjs/todo-mvc.jsexe/index.html][link]] (5.2M)   | 3.7M; 5.7M; 3.2M                  |          |                | [[https://angerman.github.io/haskell-to-web/webghc/todo-mvc/index.html][link]] (18M; 4.6M)          |              |
+| mario    | [[https://angerman.github.io/haskell-to-web/ghcjs/mario.jsexe/index.html][link]] (4.0M)   | 2.9M; 4.4M; 2.6M                  |          |                | [[https://angerman.github.io/haskell-to-web/webghc/mario/index.html][link]] (18M; 4.5M)          |              |
+| flatris  | [[https://angerman.github.io/haskell-to-web/ghcjs/flatris.jsexe/index.html][link]] (7.6M)   | 5.4M; 6.9M; 4.2M                  |          |                | [[https://angerman.github.io/haskell-to-web/webghc/flatris/index.html][link]] (18M; 5.2M)          |              |
+| snake    | :(            |                                   |          |                | :(                        |              |
+| 2048     | [[https://angerman.github.io/haskell-to-web/ghcjs/2048.jsexe/index.html][link]] (5.4M)   | 3.9M; 6.0M; 3.4M                  |          |                | [[https://angerman.github.io/haskell-to-web/webghc/2048/index.html][link]] (18M; 4.7M)          |              |
+| simple   | [[https://angerman.github.io/haskell-to-web/ghcjs/simple.jsexe/index.html][link]] (3.8M)   | 2.8M; 4.3M; 2.5M                  |          |                | [[https://angerman.github.io/haskell-to-web/webghc/simple/index.html][link]] (18M; 4.4M)          |              |
