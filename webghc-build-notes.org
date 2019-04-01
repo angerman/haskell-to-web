@@ -1,0 +1,66 @@
+* Building WebGHC 8.6 on macOS and linux
+
+** [linux] Prerequisites: svn, git, cmake, g++, libffi-dev, ...
+- apt-get install them or similar
+** [macOS] Prerequisites: svn, git, cmake, g++, libffi-dev, ...
+- install via homebrew
+
+** As WebGHC relies on a traditional toolchain
+
+We'll set up LLVM tools as well as muslc to provide
+a basic form of SDK.
+
+#+BEGIN_SRC bash
+git clone https://github.com/zw3rk/wasmception
+(cd wasmception && make)
+#+END_SRC
+
+** We will also use the ~toolchain-wrapper~ appraoch
+
+This is used to provide a uniform interface across the tools and
+inject flags as needed.
+
+#+BEGIN_SRC bash
+clone https://github.com/zw3rk/toolchain-wrapper
+(cd toolchain-wrapper && ./bootstrap)
+export PATH=$PWD/toolchain-wrapper:$PATH
+#+END_SRC
+
+Also modify ~toolchain-wrapper/wasm-toolchain.config~ to point to the
+SDK as inidicated by the last lines of the SDK build step.
+
+** build ghc
+
+This should be identical to building cross compilers with GHC.
+
+#+BEGIN_SRC bash
+git config --global url."https://github.com/WebGHC/packages-".insteadOf   https://github.com/WebGHC/packages/
+git clone --recursive https://github.com/WebGHC/ghc --branch ghc-8.6.3-webghc
+(cd ghc && ./boot)
+#+END_SRC
+
+As the ~wasm32-unknown-unknown-wasm~ target is rather new, and
+autoconf is always lagging a bit behind, we need to copy the
+~config.sub~ around as needed.
+
+#+BEGIN_SRC bash
+(cd ghc && find libraries -name "config.sub" -exec cp "config.sub" {} \; )
+#+END_SRC
+
+As usual modify the ~mk/build.mk~.  We'll add two extra settings
+needed for WebGHC, as ~libffi~ does not work.
+
+#+BEGIN_SRC bash
+(cd ghc && sed -E "s/^#BuildFlavour[ ]+= quick-cross$/BuildFlavour = quick-cross/" < mk/build.mk.sample > mk/build.mk)
+(cd ghc && echo "DisableFFI=YES" >> mk/build.mk)
+(cd ghc && echo "UseLibFFIForAdjustors=NO" >> mk/build.mk)
+#+END_SRC
+
+And kick of the build (make sure you have ghc, and cabal in path)
+
+#+BEGIN_SRC bash
+(cd ghc && ./configure --target=wasm32-unknown-unknown-wasm)
+(cd ghc && make -s -j)
+#+END_SRC
+
+* Building WebGHC 8.6 on Linux

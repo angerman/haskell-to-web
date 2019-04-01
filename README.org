@@ -12,10 +12,10 @@ compilers.
 
 |          | Linux | macOS | Windows |
 | ghcjs    | Yes   | Yes   |         |
-| Asterius |       |       |         |
+| Asterius | Yes   | No    |         |
 | WebGHC   | Yes   | Yes   |         |
 
-Notes: [[ghcjs-build-notes.org][ghcjs]]
+Notes: [[ghcjs-build-notes.org][ghcjs]] [[webghc-build-notes.org][WebGHC]]
 
 ** Features
 
@@ -56,6 +56,9 @@ wasm32-unknown-unknown-wasm-cabal new-build --project-file=webghc.project exe:$a
 #+END_SRC
 
 **** optimizing
+The wasm files could be optimized with ~binaryen~'s ~wasm-opt -Os~.
+Webpackifying the javascript support could result in dramatic
+savings. (TODO)
 
 
 *** A selection of [[http://haskell-miso.org][miso]] apps (these do not require TH)

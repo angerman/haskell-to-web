@@ -1,0 +1,74 @@
+* Building Asterius on macOS
+
+** Asterius relies on a GHC fork
+
+ghc doesn't make it particularly easy to clone from anywhere that is
+not https://gitlab.haskell.org/ghc/ghc :(  Thus we need to setup some
+git url rewrites
+
+#+BEGIN_SRC
+git config --global url."https://gitlab.haskell.org/ghc/packages/".insteadOf                       https://github.com/TerrorJack/packages/
+git config --global url."https://gitlab.haskell.org/ghc/haddock".insteadOf                         https://github.com/TerrorJack/haddock
+git config --global url."https://gitlab.haskell.org/ghc/nofib".insteadOf                           https://github.com/TerrorJack/nofib
+git config --global url."https://gitlab.haskell.org/ghc/libffi-tarballs".insteadOf                 https://github.com/TerrorJack/libffi-tarballs
+git config --global url."https://gitlab.haskell.org/ghc/gmp-tarballs".insteadOf                    https://github.com/TerrorJack/gmp-tarballs
+git config --global url."https://gitlab.haskell.org/ghc/arcanist-external-json-linter".insteadOf   https://github.com/TerrorJack/arcanist-external-json-linter
+#+END_SRC
+
+#+BEGIN_SRC
+git clone --recursive https://github.com/TerrorJack/ghc --branch asterius ghc
+#+END_SRC
+
+Use the following commit: ~015842d49e13e6e75ce69b4cae1fd384c12f5d17~
+#+BEGIN_SRC
+(cd ghc && git checkout 015842d49e13e6e75ce69b4cae1fd384c12f5d17)
+#+END_SRC
+
+Building follows the standard ghc build procedure
+#+BEGIN_SRC
+(cd ghc && git clean -xfd)
+(cd ghc && ./boot)
+(cd ghc && sed -E "s/^#BuildFlavour[ ]+= quick-cross$/BuildFlavour = quick-cross/" < mk/build.mk.sample > mk/build.mk)
+(cd ghc && ./configure)
+(cd ghc && make -s -j)
+#+END_SRC
+
+** Building Asterius
+
+With the custom GHC in path.
+
+Clone asterius
+
+#+BEGIN_SRC
+git clone --recursive https://github.com/tweag/asterius.git
+#+END_SRC
+
+NOTE: to build on macOS, you will need https://github.com/tweag/asterius/pull/55
+
+To build with cabal
+
+#+BEGIN_SRC
+(asterius && echo "packages: asterius binaryen ghc-toolkit inline-js/inline-js npm-utils wabt wasm-toolkit" > cabal.project)
+#+END_SRC
+
+With ~hpack~ in PATH (~cabal install hpack~) we can generate the cabal
+files for each package.
+
+#+BEGIN_SRC
+(cd asterius && find . -name "package.yaml" -exec hpack {} \;)
+#+END_SRC
+
+This should be enough to build with ~cabal new-build~.
+
+#+BEGIN_SRC
+(cd asterius && cabal new-build asterius -w /path/to/custom/ghc/bin/ghc)
+#+END_SRC
+
+Finally we just need to collect the build artifacts:
+
+#+BEGIN_SRC
+(cd asterius && mkdir bin)
+(cd asterius && find dist-newstyle -name "ahc" -type f -exec cp {} bin/ \; )
+(cd asterius && find dist-newstyle -name "ahc-boot" -type f -exec cp {} bin/ \; )
+(cd asterius && find dist-newstyle -name "ahc-link" -type f -exec cp {} bin/ \; )
+#+END_SRC
